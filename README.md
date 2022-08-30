@@ -1,1 +1,1 @@
-# super-group-project
+# Pokemon-Giphy-Group-Project
