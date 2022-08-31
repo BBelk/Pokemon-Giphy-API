@@ -10,9 +10,9 @@ GetPokemon('pikachu');
 function GetPokemon(searchName){
     var requestUrl = `https://pokeapi.co/api/v2/pokemon/${searchName}`;
 
-    var toJSon = function(response){
-        return response.json();
-    }
+     var toJSon = function(response){
+         return response.json();
+     }
 
     fetch(requestUrl)
     .then(toJSon)
