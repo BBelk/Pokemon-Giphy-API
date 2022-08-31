@@ -47,7 +47,7 @@ function GetPokemon(searchName){
         $(".img-thumbnail").attr("src", frontSprite);
         $(".img-thumbnail").attr("alt", "" + pokeName + " alt image" );
         
-        // GetGiphys();
+        GetGiphys();
     });
 }
 
@@ -60,7 +60,18 @@ function GetGiphys(){
         .then(function (data){
             console.log(data);
             //generate giphys
-        });
+        for(var i = 0; i < data.data.length; i++){
+            var newGiphyCol = $(".giphy-corral").append(`<div class="col-12 col-md" style="margin-top:10px"></div>`);
+            // console.log('here');
+            var newGiphyImg = newGiphyCol.append(`<img src='' style="margin-top:10px"></img>`);
+            var NewSprite = data.data[i].images.original.url;
+            console.log(NewSprite)
+            newGiphyImg.attr("src", NewSprite);
+            newGiphyCol.css("margin-top", "10px");
+        // evolutionButtons.push(newButton);
+        // Giphy not yet loading to page
+        }
+    });
 }
 
 function GetSpecies(newId){
