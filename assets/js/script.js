@@ -25,6 +25,20 @@ var handleFormSubmit = function (event) {
 };
 $("#searchPoke").on('click', handleFormSubmit);
 
+//evolution button clicker
+function EvoClick(event){
+    event.preventDefault();
+    var newTarget = $(event.target);
+    // console.log("" + newTarget.html());
+    var tempName = newTarget.attr('data-id');
+    tempName = tempName;
+    // console.log("" + tempName);
+    $("#input").val(tempName);
+    handleFormSubmit(event);
+    // GetWeather(tempName); 
+}
+$(".evolution-buttons").on('click', '.btn', EvoClick);
+
 function GetPokemon(searchName){
     var requestUrl = `https://pokeapi.co/api/v2/pokemon/${searchName}`;
 
@@ -108,7 +122,7 @@ function GetEvolutionChain(newUrl){
 
 function ShowEvolutions(chain){
     // var 
-    console.log("CHAIN" + chain);
+    // console.log("CHAIN" + chain);
     var speciesNameArray = []; 
     // if(chain.species.name == pokeName){console.log("BASE OF EVOLUTION");}
     // if(chain.species.name != pokeName){console.log("NOT BASE");}
@@ -148,25 +162,20 @@ function ShowEvolutions(chain){
 }
 
 function MakeEvoButtons(speciesNameArray, myIndex){
-    // var speciesNameArray = nameArray;
-    
     for(var i = 0; i < speciesNameArray.length -1; i++){
         if(i === myIndex){continue;}
-    var newButton = $(".evolution-buttons").append(`<button class="btn btn-info btn-entry w-100" style="margin-top:10px">${speciesNameArray[i]}</button>`);
+        var superlative = "";
+        if(i < myIndex){superlative = "Evolves From: ";}
+        if(i > myIndex){superlative = "Evolves To: ";}
+    var newButton = $(".evolution-buttons").append(`<button class="btn btn-info btn-entry text-white" style="margin-top:10px" data-id="${speciesNameArray[i]}">${"" + superlative + speciesNameArray[i]}</button>`);
     newButton.css("margin-top", "10px");
     evolutionButtons.push(newButton);
+    console.log(evolutionButtons);
     }
 }
 
 function DeleteButtons(speciesNameArray, myIndex){
-    // for(var i = evolutionButtons.length -1; i >= 0; i--){
-    //     evolutionButtons[i].remove();
-    // }
-    while ($(".evolution-buttons").firstChild) {
-        $(".evolution-buttons").removeChild($(".evolution-buttons").firstChild);
-    }
-
-
+    $(".evolution-buttons").empty();
     evolutionButtons = [];
     MakeEvoButtons(speciesNameArray, myIndex)
 }
