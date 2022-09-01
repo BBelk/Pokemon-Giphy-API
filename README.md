@@ -5,7 +5,13 @@
 2. [Visuals](#visuals)
 
 ## Description
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, dignissimos neque! Itaque error tempora officia velit adipisci beatae ipsa ad non sit? Aliquid dolorem necessitatibus molestiae sunt ea perspiciatis corrupti.
+This project is an interactive front-end webpage that utilizes a GIPHY API and Pokemon API.
+
+It emphasizes the use of JavaScript, Bootstrap, and jQuery,.
+
+When the user searches a Pokemon name in the search box, they are presented with an image of the searched Pokemon, selected information, a variety of GIPHS, and a list of the Pokemon it evolves to and from.  
+
+The application also utilizes local storage to store the users recent searches. 
 
 [Link to live site](https://bbelk.github.io/pokemon-giphy-group-project/) 
 
