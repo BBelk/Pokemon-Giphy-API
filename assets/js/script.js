@@ -140,6 +140,47 @@ function GetEvolutionChain(newUrl){
     });
 }
 
+var toLocalStorage = function(pokeName){
+    var savedPoke = JSON.parse(localStorage.getItem('Pokemon')) || [];
+    savedPoke.push(pokeName)
+    var pokeArray = Array.from(new Set(savedPoke))
+    var saved = JSON.stringify(pokeArray);
+    localStorage.setItem('Pokemon', saved)
+    displayPokeBtn()
+};
+
+var displayPokeBtn = function(pokes){
+
+    var pokes = JSON.parse(localStorage.getItem('Pokemon')) || [];
+    var showFive = pokes
+    if(pokes.length >= 5){
+        showFive = pokes.slice(pokes.length-5)
+
+    }
+    // var recent = $('.recent')
+    // recent.empty()
+    // currentWeather.innerHTML= null
+    // $(".giphy-corral").empty();
+    $(".recents").empty();
+    for(var i = showFive.length; i>=0;i--){
+        GenerateButton(showFive[i])
+    }
+//     for(poke of showFive){
+//         GenerateButton(poke)
+//     }
+}
+function GenerateButton(newName){
+    if(typeof newName ==='undefined'){
+        return;
+    }
+    console.log("to append: "  + " " + newName);
+    // $(".saved-locations").css("display","block");
+    var newButton = $(".recents").append(`<button class="btn btn-info btn-entry w-100" style="margin-top:10px">${newName}</button>`);
+    newButton.css("margin-top", "10px");
+    // generateButtons.push(newButton);
+}
+
+
 function ShowEvolutions(chain){
     // var 
     // console.log("CHAIN" + chain);
@@ -179,6 +220,7 @@ function ShowEvolutions(chain){
     MakeEvoButtons(speciesNameArray, myIndex)
     // DeleteButtons(speciesNameArray, myIndex);
     displayData()
+    toLocalStorage(speciesNameArray[myIndex])
 }
 
 function MakeEvoButtons(speciesNameArray, myIndex){
@@ -252,6 +294,15 @@ input.addEventListener("keypress", function(event) {
   }
 });
 
+// var toLocalStorage = function(){
+//     var savedPoke = JSON.parse(localStorage.getItem('Pokemon')) || [];
+//     savedPoke.push(speciesNameArray[myIndex])
+//     var pokeArray = Array.from(new Set(savedPoke))
+//     var saved = JSON.stringify(pokeArray);
+//     console.log(saved)
+//     localStorage.setItem('Pokemon', saved)
+// };
+// }
 // function GenerateButton(newID, newName){
 //     console.log("to append: " + newID + " " + newName);
 //     $(".saved-locations").css("display","block");
