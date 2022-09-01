@@ -2,7 +2,7 @@ var giphyApiKey = "VuwBgFgeCQ5ydrIwijUqcB8ixpaQBzB0";
 
 //// global vars to reset
 var evolutionButtons = [];
-var giphyButtons =[];
+// var giphyButtons =[];
 ////
 
 // var pokeName = "eevee";
