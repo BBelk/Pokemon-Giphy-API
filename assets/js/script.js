@@ -206,6 +206,18 @@ $(document).ready(function(){
     $('.dropdown-toggle').dropdown();
 });
 
+//trying to make the enter button work on search 
+// Get the input field
+var input = document.getElementById("input");
+
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("searchPoke").click();
+  }
+});
+
 // function GenerateButton(newID, newName){
 //     console.log("to append: " + newID + " " + newName);
 //     $(".saved-locations").css("display","block");
