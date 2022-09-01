@@ -201,7 +201,7 @@ function displayData(){
     $('#flavor-text').html(flavorText)
     
 }
-=======
+
 $(document).ready(function(){
     $('.dropdown-toggle').dropdown();
 });
