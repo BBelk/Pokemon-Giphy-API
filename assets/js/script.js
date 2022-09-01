@@ -120,7 +120,7 @@ function GetEvolutionChain(newUrl){
     .then(function (data){
         console.log(data);
         DeleteEvoButtons();
-        if(data.chain.evolves_to.length === 0){console.log("DOES NOT EVOLVE");return;}
+        // if(data.chain.evolves_to.length === 0){console.log("DOES NOT EVOLVE");return;}
         ShowEvolutions(data.chain);
     });
 }
