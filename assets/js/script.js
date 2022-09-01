@@ -185,6 +185,9 @@ function DeleteEvoButtons(){
     // MakeEvoButtons(speciesNameArray, myIndex)
 }
 
+$(document).ready(function(){
+    $('.dropdown-toggle').dropdown();
+});
 // function GenerateButton(newID, newName){
 //     console.log("to append: " + newID + " " + newName);
 //     $(".saved-locations").css("display","block");
