@@ -40,6 +40,19 @@ function EvoClick(event){
 }
 $(".evolution-buttons").on('click', '.btn', EvoClick);
 
+function DropdownClick(event){
+    event.preventDefault();
+    // console.log("DID THING");  
+    var tempName = $(event.target).text();  
+    // console.log("" + $(event.target).text());
+
+    $("#input").val(tempName);
+    handleFormSubmit(event);
+}
+
+$(".dropdown-menu").on('click', '.dropdown-item', DropdownClick);
+
+
 function GetPokemon(searchName){
     var requestUrl = `https://pokeapi.co/api/v2/pokemon/${searchName}`;
 
@@ -189,17 +202,38 @@ function DeleteEvoButtons(){
 
 
 function displayData(){
-    var type = firstData.types[0].type.name
-    var generation = secondData.generation.name;
-    var habitat = secondData.habitat.name;
-    var flavorText = secondData.flavor_text_entries[0].flavor_text;
-    var abilities = firstData.abilities[0].ability.name;
-    $('#type').html('<b>Type: </b>'+type)
-    $('#generation').html("<b>Generation: </b>"+generation)
-    $('#habitat').html("<b>Habitat: </b>"+habitat)
-    $('#abilities').html("<b>Abilities:</b> "+abilities)
+    var type = Capitalizer(firstData.types[0].type.name);
+    if(firstData.types.length > 1){
+        type = type + " / " + Capitalizer(firstData.types[1].type.name);
+    }
+    var generation = Capitalizer(secondData.generation.name);
+    generation = GenEndFixer(generation);
+    if(secondData.habitat){
+        var habitat = Capitalizer(secondData.habitat.name);
+    }
+    var flavorText = secondData.flavor_text_entries[0].flavor_text.replace(/[\f\n]/gm, ' ');
+    var abilities = Capitalizer(firstData.abilities[0].ability.name);
+    if(firstData.abilities.length > 1){
+        abilities = abilities + " / " + Capitalizer(firstData.abilities[1].ability.name);
+    }
+    $('#type').html(type)
+    $('#generation').html(generation)
+    $('#habitat').html(habitat)
+    $('#abilities').html(abilities)
     $('#flavor-text').html(flavorText)
     
+}
+
+function Capitalizer(thingToCapitalize){
+    return thingToCapitalize.charAt(0).toUpperCase() + thingToCapitalize.slice(1);
+}
+
+function GenEndFixer(genToFix){
+    // var firstPart = genToFix.substring(str.indexOf('-') + 1);
+    var firstPart = genToFix.split('-')[1];
+    var lastPart = firstPart.toUpperCase();
+    return "Generation-" + lastPart;
+    // return "test";
 }
 
 $(document).ready(function(){
