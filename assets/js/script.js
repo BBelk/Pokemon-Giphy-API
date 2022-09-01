@@ -187,6 +187,7 @@ function DeleteEvoButtons(){
     // MakeEvoButtons(speciesNameArray, myIndex)
 }
 
+
 function displayData(){
     var type = firstData.types[0].type.name
     var generation = secondData.generation.name;
@@ -200,6 +201,11 @@ function displayData(){
     $('#flavor-text').html(flavorText)
     
 }
+=======
+$(document).ready(function(){
+    $('.dropdown-toggle').dropdown();
+});
+
 // function GenerateButton(newID, newName){
 //     console.log("to append: " + newID + " " + newName);
 //     $(".saved-locations").css("display","block");
