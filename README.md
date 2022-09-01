@@ -7,7 +7,7 @@
 ## Description
 This project is an interactive front-end webpage that utilizes a GIPHY API and Pokemon API.
 
-It emphasizes the use of JavaScript, Bootstrap, and jQuery,.
+It emphasizes the use of JavaScript, Bootstrap, and jQuery.
 
 When the user searches a Pokemon name in the search box, they are presented with an image of the searched Pokemon, selected information, a variety of GIPHS, and a list of the Pokemon it evolves to and from.  
 
