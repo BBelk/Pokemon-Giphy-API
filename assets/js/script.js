@@ -66,7 +66,8 @@ function GetPokemon(searchName){
 }
 
 function GetGiphys(){
-    giphyUrl = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${pokeName}&limit=5`;
+    var giphySearchName = "" + pokeName + " Pokemon";
+    giphyUrl = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${giphySearchName}&limit=5`;
         fetch(giphyUrl)
         .then(function(response) {
             return response.json();
@@ -74,16 +75,18 @@ function GetGiphys(){
         .then(function (data){
             console.log(data);
             //generate giphys
+            $(".giphy-corral").empty();
         for(var i = 0; i < data.data.length; i++){
-            var newGiphyCol = $(".giphy-corral").append(`<div class="col-12 col-md" style="margin-top:10px"></div>`);
+            var newGiphyCol = $(`<div class="col-2 col-md" style="margin-top:10px"></div>`);
             // console.log('here');
-            var newGiphyImg = newGiphyCol.append(`<img src='' style="margin-top:10px"></img>`);
+            var newGiphyImg = $('<img src="" class="w-100" style="margin-top:10px"/>');
             var NewSprite = data.data[i].images.original.url;
-            console.log(NewSprite)
+            console.log(NewSprite);
             newGiphyImg.attr("src", NewSprite);
-            newGiphyCol.css("margin-top", "10px");
-        // evolutionButtons.push(newButton);
-        // Giphy not yet loading to page
+
+            $(newGiphyCol).append($(newGiphyImg));
+            $(".giphy-corral").append($(newGiphyCol));
+
         }
     });
 }
@@ -99,7 +102,8 @@ function GetSpecies(newId){
     .then(function (data){
         console.log(data);
         GetEvolutionChain(data.evolution_chain.url);
-        console.log("" + data.flavor_text_entries[0].flavor_text);
+        //flavor text
+        // console.log("" + data.flavor_text_entries[0].flavor_text);
     });
 
 }
@@ -115,6 +119,7 @@ function GetEvolutionChain(newUrl){
     .then(toJSon)
     .then(function (data){
         console.log(data);
+        DeleteEvoButtons();
         if(data.chain.evolves_to.length === 0){console.log("DOES NOT EVOLVE");return;}
         ShowEvolutions(data.chain);
     });
@@ -133,7 +138,7 @@ function ShowEvolutions(chain){
     for(var i = 0; i < chain.evolves_to.length; i++){
         speciesNameArray.push(chain.evolves_to[i].species.name);
         if(chain.evolves_to[i].evolves_to.length !== 0){
-            console.log("EVOLVES AGAIN");
+            // console.log("EVOLVES AGAIN");
             for(var j = 0; j < chain.evolves_to[i].evolves_to.length; j++){
                 speciesNameArray.push(chain.evolves_to[i].evolves_to[j].species.name);
             }
@@ -156,8 +161,8 @@ function ShowEvolutions(chain){
     // pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
         speciesNameArray[z] = newName;
     $(".current-name").html("" + speciesNameArray[myIndex]);
-    // MakeEvoButtons(speciesNameArray, myIndex)
-    DeleteButtons(speciesNameArray, myIndex);
+    MakeEvoButtons(speciesNameArray, myIndex)
+    // DeleteButtons(speciesNameArray, myIndex);
 
 }
 
@@ -174,10 +179,10 @@ function MakeEvoButtons(speciesNameArray, myIndex){
     }
 }
 
-function DeleteButtons(speciesNameArray, myIndex){
+function DeleteEvoButtons(){
     $(".evolution-buttons").empty();
     evolutionButtons = [];
-    MakeEvoButtons(speciesNameArray, myIndex)
+    // MakeEvoButtons(speciesNameArray, myIndex)
 }
 
 // function GenerateButton(newID, newName){
