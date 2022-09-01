@@ -3,3 +3,37 @@
   margin: 0;
   box-sizing: border-box;
 }
+/* nav section */
+#navbar {
+  background-color: #3B4CCA;
+}
+
+#navbar span {
+  color: #FFDE00; 
+}
+
+/* search section */
+#search-btn {
+  background-color: #FFDE00;
+  color: #2F3336;
+  margin-top: 7%;
+}
+
+#pokemon-dropdown {
+  background-color: #FFDE00;
+  color: #2F3336;
+  margin-top: 7%;
+}
+
+/* recent buttons */
+#blue-btn {
+  background-color: #3B4CCA;
+  color: #F1F2F6;
+}
+
+/* evolve buttons */
+#red-btn {
+  background-color: #CC0000;
+  color: #F1F2F6
+}
+
