@@ -4,7 +4,8 @@ var giphyApiKey = "VuwBgFgeCQ5ydrIwijUqcB8ixpaQBzB0";
 var evolutionButtons = [];
 // var giphyButtons =[];
 ////
-
+var firstData = "";
+var secondData = "";
 // var pokeName = "eevee";
 var pokeName = "pikachu";
 // var pokeName = "tauros";
@@ -50,7 +51,7 @@ function GetPokemon(searchName){
     .then(toJSon)
       .then(function (data) {
         console.log(data);
-        // DeleteButtons();
+        firstData = data;
         GetSpecies(data.id);
 
         var frontSprite = data.sprites.other.home.front_default;
@@ -74,7 +75,7 @@ function GetGiphys(){
         })
         .then(function (data){
             console.log(data);
-            //generate giphys
+           
             $(".giphy-corral").empty();
         for(var i = 0; i < data.data.length; i++){
             var newGiphyCol = $(`<div class="col-2 col-md" style="margin-top:10px"></div>`);
@@ -101,6 +102,7 @@ function GetSpecies(newId){
     .then(toJSon)
     .then(function (data){
         console.log(data);
+        secondData = data;
         GetEvolutionChain(data.evolution_chain.url);
         //flavor text
         // console.log("" + data.flavor_text_entries[0].flavor_text);
@@ -163,7 +165,7 @@ function ShowEvolutions(chain){
     $(".current-name").html("" + speciesNameArray[myIndex]);
     MakeEvoButtons(speciesNameArray, myIndex)
     // DeleteButtons(speciesNameArray, myIndex);
-
+    displayData()
 }
 
 function MakeEvoButtons(speciesNameArray, myIndex){
@@ -185,9 +187,25 @@ function DeleteEvoButtons(){
     // MakeEvoButtons(speciesNameArray, myIndex)
 }
 
+
+function displayData(){
+    var type = firstData.types[0].type.name
+    var generation = secondData.generation.name;
+    var habitat = secondData.habitat.name;
+    var flavorText = secondData.flavor_text_entries[0].flavor_text;
+    var abilities = firstData.abilities[0].ability.name;
+    $('#type').html('<b>Type: </b>'+type)
+    $('#generation').html("<b>Generation: </b>"+generation)
+    $('#habitat').html("<b>Habitat: </b>"+habitat)
+    $('#abilities').html("<b>Abilities:</b> "+abilities)
+    $('#flavor-text').html(flavorText)
+    
+}
+=======
 $(document).ready(function(){
     $('.dropdown-toggle').dropdown();
 });
+
 // function GenerateButton(newID, newName){
 //     console.log("to append: " + newID + " " + newName);
 //     $(".saved-locations").css("display","block");
