@@ -267,7 +267,25 @@ function GenEndFixer(genToFix){
 }
 
 function GetFlavorText(){
-    secondData.flavor_text_entries[0].flavor_text.replace(/[\f\n]/gm, ' ');
+    // var newString = secondData.flavor_text_entries[0].flavor_text; 
+    var newString = ""; 
+    var flavCounter = 0;
+    var usedArray = [];
+    while(flavCounter < 3){
+       var getRand = Math.floor(Math.random()*secondData.flavor_text_entries.length);
+        // if(usedArray.includes(getRand)){continue;}
+        
+        if(secondData.flavor_text_entries[getRand].language.name === 'en'){
+            if(usedArray.includes(secondData.flavor_text_entries[getRand].flavor_text.toLowerCase().replace(/[\f\n]/gm, ' '))){continue;}
+            var brThing = "<br><br>";
+            if(flavCounter == 0){brThing = "";}
+            newString = newString + brThing + secondData.flavor_text_entries[getRand].flavor_text;
+            usedArray.push(secondData.flavor_text_entries[getRand].flavor_text.toLowerCase().replace(/[\f\n]/gm, ' '));
+            flavCounter += 1;
+        }
+    }
+    console.log("" + usedArray);
+    return newString.replace(/[\f\n]/gm, ' ');
 }
 
 $(document).ready(function(){
