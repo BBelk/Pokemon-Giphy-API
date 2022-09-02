@@ -4,8 +4,18 @@ var evolutionButtons = [];
 
 var firstData = "";
 var secondData = "";
+
 var pokeName = "pikachu";
-GetPokemon(pokeName);
+function OnPageLoad(){
+    var savedPoke = JSON.parse(localStorage.getItem('Pokemon')) || [];
+    console.log("" + savedPoke);
+        if(savedPoke.length > 0){
+            pokeName = savedPoke[savedPoke.length -1].toLowerCase();
+        }
+        GetPokemon(pokeName);
+    }
+
+OnPageLoad();
 
 var handleFormSubmit = function (event) {
     event.preventDefault();
@@ -79,7 +89,8 @@ function GetGiphys(){
             $(".giphy-corral").empty();
         for(var i = 0; i < data.data.length; i++){
             var newGiphyCol = $(`<div class="col-2 col-md" style="margin-top:10px"></div>`);
-            var newGiphyImg = $('<img src="" class="w-100" style="margin-top:10px"/>');
+            var newGiphyImg = $('<img src="" class="w-100 gImg" style="margin-top:10px"/>');
+            newGiphyImg.attr("href", data.data[i].bitly_gif_url);
             var NewSprite = data.data[i].images.original.url;
             console.log(NewSprite);
             newGiphyImg.attr("src", NewSprite);
@@ -90,6 +101,14 @@ function GetGiphys(){
         }
     });
 };
+
+function GiphyClick(event){
+    event.preventDefault();
+    var newLink =  $(event.target).attr('href');
+    window.open(newLink, '_blank'); 
+}
+
+$(document).on('click', '.gImg', GiphyClick);
 
 function GetSpecies(newId){
 
@@ -127,8 +146,8 @@ var toLocalStorage = function(pokeName){
     savedPoke.push(pokeName)
     var pokeArray = Array.from(new Set(savedPoke))
     var saved = JSON.stringify(pokeArray);
-    localStorage.setItem('Pokemon', saved)
-    displayPokeBtn()
+    localStorage.setItem('Pokemon', saved);
+    displayPokeBtn();
 };
 
 var displayPokeBtn = function(pokes){
@@ -140,13 +159,13 @@ var displayPokeBtn = function(pokes){
         // takes old pokes out of array
         var pokeArray = Array.from(new Set(showFive))
         var saved = JSON.stringify(pokeArray);
-        localStorage.setItem('Pokemon', saved)
+        localStorage.setItem('Pokemon', saved);
         //
     }
 
     $(".recents").empty();
     for(var i = showFive.length; i>=0;i--){
-        GenerateButton(showFive[i])
+        GenerateButton(showFive[i]);
     }
 
 }
@@ -224,7 +243,7 @@ function displayData(){
     if(secondData.habitat){
         var habitat = Capitalizer(secondData.habitat.name);
     }
-    var flavorText = secondData.flavor_text_entries[0].flavor_text.replace(/[\f\n]/gm, ' ');
+    var flavorText = GetFlavorText();
     var abilities = Capitalizer(firstData.abilities[0].ability.name);
     if(firstData.abilities.length > 1){
         abilities = abilities + " / " + Capitalizer(firstData.abilities[1].ability.name);
@@ -245,6 +264,10 @@ function GenEndFixer(genToFix){
     var firstPart = genToFix.split('-')[1];
     var lastPart = firstPart.toUpperCase();
     return "Generation-" + lastPart;
+}
+
+function GetFlavorText(){
+    secondData.flavor_text_entries[0].flavor_text.replace(/[\f\n]/gm, ' ');
 }
 
 $(document).ready(function(){
