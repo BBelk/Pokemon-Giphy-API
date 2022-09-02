@@ -142,6 +142,7 @@ function GetEvolutionChain(newUrl){
 }
 
 var toLocalStorage = function(pokeName){
+    // console.log("ADDING TO ARRAY");
     var savedPoke = JSON.parse(localStorage.getItem('Pokemon')) || [];
     savedPoke.push(pokeName)
     var pokeArray = Array.from(new Set(savedPoke))
@@ -154,9 +155,13 @@ var displayPokeBtn = function(pokes){
 
     var pokes = JSON.parse(localStorage.getItem('Pokemon')) || [];
     var showFive = pokes;
+    var indexOfClicked = pokes.indexOf(Capitalizer(pokeName), 0);
+    pokes.push(pokes.splice(indexOfClicked, 1)[0]);
+    // if(showFive.in)
     if(pokes.length >= 5){
         showFive = pokes.slice(pokes.length-5);
         // takes old pokes out of array
+        
         var pokeArray = Array.from(new Set(showFive))
         var saved = JSON.stringify(pokeArray);
         localStorage.setItem('Pokemon', saved);
@@ -173,11 +178,7 @@ function GenerateButton(newName){
     if(typeof newName ==='undefined'){
         return;
     }
-    console.log("to append: "  + " " + newName);
-    // $(".saved-locations").css("display","block");
     var newButton = $(".recents").append(`<button class="btn btn-outline-dark text-white btn-primary btn-entry w-100" style="margin-top: 10px">${newName}</button>`);
-    // newButton.css("margin-top", "10px");
-    // generateButtons.push(newButton);
 }
 
 function ShowEvolutions(chain){
@@ -273,7 +274,6 @@ function GetFlavorText(){
     var usedArray = [];
     while(flavCounter < 3){
        var getRand = Math.floor(Math.random()*secondData.flavor_text_entries.length);
-        // if(usedArray.includes(getRand)){continue;}
         
         if(secondData.flavor_text_entries[getRand].language.name === 'en'){
             if(usedArray.includes(secondData.flavor_text_entries[getRand].flavor_text.toLowerCase().replace(/[\f\n]/gm, ' '))){continue;}
