@@ -19,7 +19,7 @@ var handleFormSubmit = function (event) {
     pokeName = nameInput;
     GetPokemon(nameInput);    
 }
-$("#searchPoke").on('click', handleFormSubmit);
+$(".searchPoke").on('click', handleFormSubmit);
 
 // Evolution Button Clicker
 function EvoClick(event){
@@ -134,10 +134,14 @@ var toLocalStorage = function(pokeName){
 var displayPokeBtn = function(pokes){
 
     var pokes = JSON.parse(localStorage.getItem('Pokemon')) || [];
-    var showFive = pokes
+    var showFive = pokes;
     if(pokes.length >= 5){
-        showFive = pokes.slice(pokes.length-5)
-
+        showFive = pokes.slice(pokes.length-5);
+        // takes old pokes out of array
+        var pokeArray = Array.from(new Set(showFive))
+        var saved = JSON.stringify(pokeArray);
+        localStorage.setItem('Pokemon', saved)
+        //
     }
 
     $(".recents").empty();
