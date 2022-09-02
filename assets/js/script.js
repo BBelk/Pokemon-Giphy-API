@@ -152,11 +152,10 @@ function GenerateButton(newName){
     }
     console.log("to append: "  + " " + newName);
     // $(".saved-locations").css("display","block");
-    var newButton = $(".recents").append(`<button class="btn btn-info btn-entry w-100" style="margin-top:10px">${newName}</button>`);
-    newButton.css("margin-top", "10px");
+    var newButton = $(".recents").append(`<button class="btn btn-outline-dark text-white btn-primary btn-entry w-100" style="margin-top: 10px">${newName}</button>`);
+    // newButton.css("margin-top", "10px");
     // generateButtons.push(newButton);
 }
-
 
 function ShowEvolutions(chain){
     var speciesNameArray = []; 
@@ -198,7 +197,7 @@ function MakeEvoButtons(speciesNameArray, myIndex){
         var superlative = "";
         if(i < myIndex){superlative = "Evolves From: ";}
         if(i > myIndex){superlative = "Evolves To: ";}
-    var newButton = $(".evolution-buttons").append(`<button class="btn btn-info btn-entry text-white" style="margin-top:10px" data-id="${speciesNameArray[i]}">${"" + superlative + speciesNameArray[i]}</button>`);
+    var newButton = $(".evolution-buttons").append(`<button class="btn btn-outline-dark btn-danger btn-entry text-white" style="margin-top:10px " data-id="${speciesNameArray[i]}">${"" + superlative + speciesNameArray[i]}</button>`);
     newButton.css("margin-top", "10px");
     evolutionButtons.push(newButton);
     console.log(evolutionButtons);
