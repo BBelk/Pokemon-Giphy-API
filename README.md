@@ -16,4 +16,4 @@ The application also utilizes local storage to store the users recent searches.
 [Link to live site](https://bbelk.github.io/pokemon-giphy-group-project/) 
 
 ## Visuals
-![Alt text](./assets/Pokemon-Giphy.png "Website Screenshot")
+![Alt text](./assets/Pokemon-Giphy%20(1).png "Website Screenshot")
