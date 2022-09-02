@@ -11,6 +11,7 @@ function OnPageLoad(){
     console.log("" + savedPoke);
         if(savedPoke.length > 0){
             pokeName = savedPoke[savedPoke.length -1].toLowerCase();
+            $("#input").val(Capitalizer(pokeName));
         }
         GetPokemon(pokeName);
     }
@@ -292,15 +293,6 @@ $(document).ready(function(){
     $('.dropdown-toggle').dropdown();
 });
 
-var input = document.getElementById("input");
-
-input.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("searchPoke").click();
-  }
-});
-
 function ListItemClick(event){
     event.preventDefault();
     var newTarget = $(event.target);
@@ -310,3 +302,12 @@ function ListItemClick(event){
     handleFormSubmit(event); 
 }
 $(".recents").on('click', '.btn', ListItemClick);
+
+// var input = document.getElementById("input");
+
+// input.addEventListener("keypress", function(event) {
+//   if (event.key === "Enter") {
+//     event.preventDefault();
+//     document.getElementsById("searchPoke").click();
+//   }
+// });
