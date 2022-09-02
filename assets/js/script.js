@@ -89,7 +89,7 @@ function GetGiphys(){
            
             $(".giphy-corral").empty();
         for(var i = 0; i < data.data.length; i++){
-            var newGiphyCol = $(`<div class="col-2 col-md" style="margin-top:10px"></div>`);
+            var newGiphyCol = $(`<div class="col-lg-2 col-s-2" style="margin-top:10px"></div>`);
             var newGiphyImg = $('<img src="" class="w-100 gImg" style="margin-top:10px"/>');
             newGiphyImg.attr("href", data.data[i].bitly_gif_url);
             var NewSprite = data.data[i].images.original.url;
