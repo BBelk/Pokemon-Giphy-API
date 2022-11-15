@@ -13,7 +13,7 @@ When the user searches a Pokemon name in the search box, they are presented with
 
 The application also utilizes local storage to store the users recent searches. 
 
-[Link to live site](https://bbelk.github.io/pokemon-giphy-group-project/) 
+[Link to live site](https://bbelk.github.io/Pokemon-Giphy-API/) 
 
 ## Visuals
 ![Alt text](./assets/Pokemon-Giphy%20(1).png "Website Screenshot")
